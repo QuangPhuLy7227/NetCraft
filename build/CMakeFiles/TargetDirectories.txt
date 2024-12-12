@@ -1,0 +1,3 @@
+/Users/quangphuly/Documents/NetCraft/build/CMakeFiles/NetCraft.dir
+/Users/quangphuly/Documents/NetCraft/build/CMakeFiles/edit_cache.dir
+/Users/quangphuly/Documents/NetCraft/build/CMakeFiles/rebuild_cache.dir

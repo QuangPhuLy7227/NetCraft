@@ -1,0 +1,8 @@
+load_protocols;
+list_protocols;
+list_protocols_by_stack;
+stack {
+    layer1: Ethernet;
+    layer2: IPv4;
+    layer3: TCP;
+};
