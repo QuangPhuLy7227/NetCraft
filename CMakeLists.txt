@@ -31,6 +31,7 @@ add_executable(NetCraft
     src/main.cpp
     src/networking/network.cpp
     src/networking/protocols.cpp
+    src/networking/packet_crafter.cpp
     src/cli/cli.cpp
     src/parser/parser.cpp
     ${BISON_Parser_OUTPUTS}

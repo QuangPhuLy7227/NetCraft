@@ -1,0 +1,12 @@
+craft_packet packet1 {
+    protocol: TCP;
+    src_port: 1234;
+    dst_port: 8080;
+    payload: "Test payload";
+};
+view_packet packet1;
+modify_packet packet1 {
+    src_port: 5678;
+    payload: "Updated payload";
+};
+send_packet packet1;

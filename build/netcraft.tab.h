@@ -41,33 +41,54 @@
    enum yytokentype {
      IDENTIFIER = 258,
      LAYER = 259,
-     LOAD_PROTOCOLS = 260,
-     LIST_PROTOCOLS = 261,
-     LIST_PROTOCOLS_BY_STACK = 262,
-     STACK = 263,
-     NUMBER = 264
+     STRING = 260,
+     STRING_LITERAL = 261,
+     NUMBER = 262,
+     LOAD_PROTOCOLS = 263,
+     LIST_PROTOCOLS = 264,
+     LIST_PROTOCOLS_BY_STACK = 265,
+     STACK = 266,
+     CRAFT_PACKET = 267,
+     VIEW_PACKET = 268,
+     MODIFY_PACKET = 269,
+     SEND_PACKET = 270,
+     PROTOCOL = 271,
+     SRC_PORT = 272,
+     DST_PORT = 273,
+     PAYLOAD = 274
    };
 #endif
 /* Tokens.  */
 #define IDENTIFIER 258
 #define LAYER 259
-#define LOAD_PROTOCOLS 260
-#define LIST_PROTOCOLS 261
-#define LIST_PROTOCOLS_BY_STACK 262
-#define STACK 263
-#define NUMBER 264
+#define STRING 260
+#define STRING_LITERAL 261
+#define NUMBER 262
+#define LOAD_PROTOCOLS 263
+#define LIST_PROTOCOLS 264
+#define LIST_PROTOCOLS_BY_STACK 265
+#define STACK 266
+#define CRAFT_PACKET 267
+#define VIEW_PACKET 268
+#define MODIFY_PACKET 269
+#define SEND_PACKET 270
+#define PROTOCOL 271
+#define SRC_PORT 272
+#define DST_PORT 273
+#define PAYLOAD 274
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 18 "src/parser/netcraft.y"
+#line 23 "src/parser/netcraft.y"
 {
     char* string;
+    int number;
 }
 /* Line 1529 of yacc.c.  */
-#line 71 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.h"
+#line 92 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

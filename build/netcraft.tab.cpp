@@ -68,21 +68,41 @@
    enum yytokentype {
      IDENTIFIER = 258,
      LAYER = 259,
-     LOAD_PROTOCOLS = 260,
-     LIST_PROTOCOLS = 261,
-     LIST_PROTOCOLS_BY_STACK = 262,
-     STACK = 263,
-     NUMBER = 264
+     STRING = 260,
+     STRING_LITERAL = 261,
+     NUMBER = 262,
+     LOAD_PROTOCOLS = 263,
+     LIST_PROTOCOLS = 264,
+     LIST_PROTOCOLS_BY_STACK = 265,
+     STACK = 266,
+     CRAFT_PACKET = 267,
+     VIEW_PACKET = 268,
+     MODIFY_PACKET = 269,
+     SEND_PACKET = 270,
+     PROTOCOL = 271,
+     SRC_PORT = 272,
+     DST_PORT = 273,
+     PAYLOAD = 274
    };
 #endif
 /* Tokens.  */
 #define IDENTIFIER 258
 #define LAYER 259
-#define LOAD_PROTOCOLS 260
-#define LIST_PROTOCOLS 261
-#define LIST_PROTOCOLS_BY_STACK 262
-#define STACK 263
-#define NUMBER 264
+#define STRING 260
+#define STRING_LITERAL 261
+#define NUMBER 262
+#define LOAD_PROTOCOLS 263
+#define LIST_PROTOCOLS 264
+#define LIST_PROTOCOLS_BY_STACK 265
+#define STACK 266
+#define CRAFT_PACKET 267
+#define VIEW_PACKET 268
+#define MODIFY_PACKET 269
+#define SEND_PACKET 270
+#define PROTOCOL 271
+#define SRC_PORT 272
+#define DST_PORT 273
+#define PAYLOAD 274
 
 
 
@@ -92,9 +112,11 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include <cstring>
 #include "networking/protocols.h"
 #include "cli/cli.h"
+#include "networking/packet_crafter.h"
 
 // Function prototypes
 std::vector<Protocol> getAvailableProtocols();
@@ -104,6 +126,9 @@ extern "C" {
     int yylex(void);
     void yyerror(const char* s);
 }
+
+std::map<std::string, PacketDetails> crafted_packets;
+std::string current_packet;
 
 
 /* Enabling traces.  */
@@ -126,12 +151,13 @@ extern "C" {
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 18 "src/parser/netcraft.y"
+#line 23 "src/parser/netcraft.y"
 {
     char* string;
+    int number;
 }
 /* Line 193 of yacc.c.  */
-#line 135 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
+#line 161 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -144,7 +170,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 148 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
+#line 174 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
 
 #ifdef short
 # undef short
@@ -357,22 +383,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  9
+#define YYFINAL  20
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   16
+#define YYLAST   71
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  14
+#define YYNTOKENS  24
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  6
+#define YYNNTS  10
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  11
+#define YYNRULES  26
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  21
+#define YYNSTATES  63
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   264
+#define YYMAXUTOK   274
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -385,14 +411,14 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    12,    13,
+       2,     2,     2,     2,     2,     2,     2,     2,    22,    23,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    10,     2,    11,     2,     2,     2,     2,
+       2,     2,     2,    20,     2,    21,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -406,7 +432,8 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19
 };
 
 #if YYDEBUG
@@ -414,24 +441,32 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     5,     9,    12,    14,    16,    18,    23,
-      25,    28
+       0,     0,     3,     5,     8,    10,    13,    16,    19,    25,
+      26,    33,    37,    44,    48,    50,    53,    58,    61,    64,
+      67,    69,    71,    73,    78,    83,    88
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      15,     0,    -1,    16,    -1,    16,    17,    13,    -1,    17,
-      13,    -1,     5,    -1,     6,    -1,     7,    -1,     8,    10,
-      18,    11,    -1,    19,    -1,    18,    19,    -1,     4,    12,
-       3,    13,    -1
+      25,     0,    -1,    26,    -1,    26,    27,    -1,    27,    -1,
+       8,    23,    -1,     9,    23,    -1,    10,    23,    -1,    11,
+      20,    28,    21,    23,    -1,    -1,    12,     3,    20,    30,
+      21,    23,    -1,    13,     3,    23,    -1,    14,     3,    20,
+      30,    21,    23,    -1,    15,     3,    23,    -1,    29,    -1,
+      28,    29,    -1,     4,    22,     3,    23,    -1,    30,    31,
+      -1,    30,    32,    -1,    30,    33,    -1,    31,    -1,    32,
+      -1,    33,    -1,    16,    22,     3,    23,    -1,    17,    22,
+       7,    23,    -1,    18,    22,     7,    23,    -1,    19,    22,
+       6,    23,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    35,    35,    39,    40,    44,    50,    59,    66,    73,
-      74,    78
+       0,    49,    49,    53,    54,    58,    64,    73,    80,    84,
+      86,    99,   115,   126,   139,   140,   144,   153,   154,   155,
+     156,   157,   158,   162,   173,   181,   191
 };
 #endif
 
@@ -440,10 +475,13 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "IDENTIFIER", "LAYER", "LOAD_PROTOCOLS",
-  "LIST_PROTOCOLS", "LIST_PROTOCOLS_BY_STACK", "STACK", "NUMBER", "'{'",
-  "'}'", "':'", "';'", "$accept", "program", "commands", "command",
-  "layer_definitions", "layer_definition", 0
+  "$end", "error", "$undefined", "IDENTIFIER", "LAYER", "STRING",
+  "STRING_LITERAL", "NUMBER", "LOAD_PROTOCOLS", "LIST_PROTOCOLS",
+  "LIST_PROTOCOLS_BY_STACK", "STACK", "CRAFT_PACKET", "VIEW_PACKET",
+  "MODIFY_PACKET", "SEND_PACKET", "PROTOCOL", "SRC_PORT", "DST_PORT",
+  "PAYLOAD", "'{'", "'}'", "':'", "';'", "$accept", "program", "commands",
+  "command", "layer_definitions", "layer_definition", "packet_fields",
+  "protocol_field", "port_field", "payload_field", 0
 };
 #endif
 
@@ -453,6 +491,7 @@ static const char *const yytname[] =
 static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      123,   125,    58,    59
 };
 # endif
@@ -460,15 +499,17 @@ static const yytype_uint16 yytoknum[] =
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    14,    15,    16,    16,    17,    17,    17,    17,    18,
-      18,    19
+       0,    24,    25,    26,    26,    27,    27,    27,    27,    27,
+      27,    27,    27,    27,    28,    28,    29,    30,    30,    30,
+      30,    30,    30,    31,    32,    32,    33
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     3,     2,     1,     1,     1,     4,     1,
-       2,     4
+       0,     2,     1,     2,     1,     2,     2,     2,     5,     0,
+       6,     3,     6,     3,     1,     2,     4,     2,     2,     2,
+       1,     1,     1,     4,     4,     4,     4
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -476,31 +517,39 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     5,     6,     7,     0,     0,     2,     0,     0,     1,
-       0,     4,     0,     0,     9,     3,     0,     8,    10,     0,
-      11
+       9,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       2,     4,     5,     6,     7,     0,     0,     0,     0,     0,
+       1,     3,     0,     0,    14,     0,    11,     0,    13,     0,
+       0,    15,     0,     0,     0,     0,     0,    20,    21,    22,
+       0,     0,     8,     0,     0,     0,     0,     0,    17,    18,
+      19,     0,    16,     0,     0,     0,     0,    10,    12,    23,
+      24,    25,    26
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     5,     6,     7,    13,    14
+      -1,     9,    10,    11,    23,    24,    36,    37,    38,    39
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -10
+#define YYPACT_NINF -15
 static const yytype_int8 yypact[] =
 {
-      -3,   -10,   -10,   -10,    -9,     6,    -3,    -5,     5,   -10,
-      -2,   -10,     0,    -4,   -10,   -10,     7,   -10,   -10,     1,
-     -10
+      -7,    -9,     4,    11,    15,     6,    13,    33,    34,    38,
+      -7,   -15,   -15,   -15,   -15,    35,    20,    18,    22,    21,
+     -15,   -15,    23,    -4,   -15,    14,   -15,    14,   -15,    40,
+      24,   -15,    26,    27,    28,    29,    -6,   -15,   -15,   -15,
+       2,    30,   -15,    43,    45,    47,    49,    36,   -15,   -15,
+     -15,    37,   -15,    39,    41,    42,    44,   -15,   -15,   -15,
+     -15,   -15,   -15
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -10,   -10,   -10,     9,   -10,     3
+     -15,   -15,   -15,    46,   -15,    48,    31,   -14,   -12,   -11
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -510,23 +559,39 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      12,     8,     1,     2,     3,     4,     9,    17,    11,    12,
-      19,    15,    16,     0,    20,    10,    18
+      22,     1,     2,     3,     4,     5,     6,     7,     8,    16,
+      32,    33,    34,    35,    12,    47,    17,    30,    32,    33,
+      34,    35,    48,    51,    49,    50,    48,    13,    49,    50,
+      32,    33,    34,    35,    14,    15,    18,    19,    20,    22,
+      25,    26,    27,    41,    28,    29,    53,    42,    43,    44,
+      45,    46,    54,    52,    55,    56,    21,     0,    40,    57,
+      58,     0,    59,     0,    60,    61,     0,    62,     0,     0,
+       0,    31
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,    10,     5,     6,     7,     8,     0,    11,    13,     4,
-       3,    13,    12,    -1,    13,     6,    13
+       4,     8,     9,    10,    11,    12,    13,    14,    15,     3,
+      16,    17,    18,    19,    23,    21,     3,    21,    16,    17,
+      18,    19,    36,    21,    36,    36,    40,    23,    40,    40,
+      16,    17,    18,    19,    23,    20,     3,     3,     0,     4,
+      20,    23,    20,     3,    23,    22,     3,    23,    22,    22,
+      22,    22,     7,    23,     7,     6,    10,    -1,    27,    23,
+      23,    -1,    23,    -1,    23,    23,    -1,    23,    -1,    -1,
+      -1,    23
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     5,     6,     7,     8,    15,    16,    17,    10,     0,
-      17,    13,     4,    18,    19,    13,    12,    11,    19,     3,
-      13
+       0,     8,     9,    10,    11,    12,    13,    14,    15,    25,
+      26,    27,    23,    23,    23,    20,     3,     3,     3,     3,
+       0,    27,     4,    28,    29,    20,    23,    20,    23,    22,
+      21,    29,    16,    17,    18,    19,    30,    31,    32,    33,
+      30,     3,    23,    22,    22,    22,    22,    21,    31,    32,
+      33,    21,    23,     3,     7,     7,     6,    23,    23,    23,
+      23,    23,    23
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1035,18 +1100,25 @@ yydestruct (yymsg, yytype, yyvaluep)
   switch (yytype)
     {
       case 3: /* "IDENTIFIER" */
-#line 28 "src/parser/netcraft.y"
+#line 42 "src/parser/netcraft.y"
 	{
     free((yyvaluep->string));
 };
-#line 1043 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
+#line 1108 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
 	break;
       case 4: /* "LAYER" */
-#line 28 "src/parser/netcraft.y"
+#line 42 "src/parser/netcraft.y"
 	{
     free((yyvaluep->string));
 };
-#line 1050 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
+#line 1115 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
+	break;
+      case 6: /* "STRING_LITERAL" */
+#line 42 "src/parser/netcraft.y"
+	{
+    free((yyvaluep->string));
+};
+#line 1122 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
 	break;
 
       default:
@@ -1355,7 +1427,7 @@ yyreduce:
   switch (yyn)
     {
         case 5:
-#line 45 "src/parser/netcraft.y"
+#line 59 "src/parser/netcraft.y"
     {
         std::vector<Protocol> protocols = getAvailableProtocols();
         std::cout << "Protocols loaded successfully.\n";
@@ -1363,7 +1435,7 @@ yyreduce:
     break;
 
   case 6:
-#line 51 "src/parser/netcraft.y"
+#line 65 "src/parser/netcraft.y"
     {
         std::vector<Protocol> protocols = getAvailableProtocols();
         std::cout << "Available Protocols:\n";
@@ -1374,7 +1446,7 @@ yyreduce:
     break;
 
   case 7:
-#line 60 "src/parser/netcraft.y"
+#line 74 "src/parser/netcraft.y"
     {
         std::vector<Protocol> protocols = getAvailableProtocols();
         std::cout << "Protocols by Stack:\n";
@@ -1383,14 +1455,73 @@ yyreduce:
     break;
 
   case 8:
-#line 67 "src/parser/netcraft.y"
+#line 81 "src/parser/netcraft.y"
     {
         std::cout << "Stack defined successfully.\n";
     ;}
     break;
 
+  case 10:
+#line 87 "src/parser/netcraft.y"
+    {
+        if (crafted_packets.find((yyvsp[(2) - (6)].string)) != crafted_packets.end()) {
+            std::cerr << "Error: Packet '" << (yyvsp[(2) - (6)].string) << "' already exists.\n";
+        } else {
+            current_packet = (yyvsp[(2) - (6)].string);
+            crafted_packets[(yyvsp[(2) - (6)].string)] = PacketDetails{"", 0, 0, ""};
+            std::cout << "Packet '" << (yyvsp[(2) - (6)].string) << "' crafted.\n";
+        }
+        free((yyvsp[(2) - (6)].string));
+        current_packet.clear();
+    ;}
+    break;
+
   case 11:
-#line 79 "src/parser/netcraft.y"
+#line 100 "src/parser/netcraft.y"
+    {
+        auto it = crafted_packets.find((yyvsp[(2) - (3)].string));
+        if (it != crafted_packets.end()) {
+            const auto& packet = it->second;
+            std::cout << "Packet '" << (yyvsp[(2) - (3)].string) << "':\n";
+            std::cout << "  Protocol: " << packet.protocol << "\n";
+            std::cout << "  Source Port: " << packet.src_port << "\n";
+            std::cout << "  Destination Port: " << packet.dst_port << "\n";
+            std::cout << "  Payload: " << packet.payload << "\n";
+        } else {
+            std::cerr << "Error: Packet '" << (yyvsp[(2) - (3)].string) << "' not found.\n";
+        }
+        free((yyvsp[(2) - (3)].string));
+    ;}
+    break;
+
+  case 12:
+#line 116 "src/parser/netcraft.y"
+    {
+        auto it = crafted_packets.find((yyvsp[(2) - (6)].string));
+        if (it != crafted_packets.end()) {
+            std::cout << "Packet '" << (yyvsp[(2) - (6)].string) << "' modified.\n";
+        } else {
+            std::cerr << "Error: Packet '" << (yyvsp[(2) - (6)].string) << "' not found.\n";
+        }
+        free((yyvsp[(2) - (6)].string));
+    ;}
+    break;
+
+  case 13:
+#line 127 "src/parser/netcraft.y"
+    {
+        auto it = crafted_packets.find((yyvsp[(2) - (3)].string));
+        if (it != crafted_packets.end()) {
+            craftPacket(it->second.protocol, it->second.src_port, it->second.dst_port, it->second.payload);
+        } else {
+            std::cerr << "Error: Packet '" << (yyvsp[(2) - (3)].string) << "' not found.\n";
+        }
+        free((yyvsp[(2) - (3)].string));
+    ;}
+    break;
+
+  case 16:
+#line 145 "src/parser/netcraft.y"
     {
         printf("Layer: %s - Protocol: %s\n", (yyvsp[(1) - (4)].string), (yyvsp[(3) - (4)].string));
         free((yyvsp[(1) - (4)].string));
@@ -1398,9 +1529,51 @@ yyreduce:
     ;}
     break;
 
+  case 23:
+#line 163 "src/parser/netcraft.y"
+    {
+        if (!current_packet.empty()) {
+            crafted_packets[current_packet].protocol = (yyvsp[(3) - (4)].string);
+            std::cout << "Set protocol for '" << current_packet << "': " << (yyvsp[(3) - (4)].string) << "\n";
+        }
+        free((yyvsp[(3) - (4)].string));
+    ;}
+    break;
+
+  case 24:
+#line 174 "src/parser/netcraft.y"
+    {
+        if (!current_packet.empty()) {
+            crafted_packets[current_packet].src_port = (yyvsp[(3) - (4)].number);
+            std::cout << "Set source port for '" << current_packet << "': " << (yyvsp[(3) - (4)].number) << "\n";
+        }
+    ;}
+    break;
+
+  case 25:
+#line 182 "src/parser/netcraft.y"
+    {
+        if (!current_packet.empty()) {
+            crafted_packets[current_packet].dst_port = (yyvsp[(3) - (4)].number);
+            std::cout << "Set destination port for '" << current_packet << "': " << (yyvsp[(3) - (4)].number) << "\n";
+        }
+    ;}
+    break;
+
+  case 26:
+#line 192 "src/parser/netcraft.y"
+    {
+        if (!current_packet.empty()) {
+            crafted_packets[current_packet].payload = (yyvsp[(3) - (4)].string);
+            std::cout << "Set payload for '" << current_packet << "': " << (yyvsp[(3) - (4)].string) << "\n";
+        }
+        free((yyvsp[(3) - (4)].string));
+    ;}
+    break;
+
 
 /* Line 1267 of yacc.c.  */
-#line 1404 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
+#line 1577 "/Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1614,6 +1787,5 @@ yyreturn:
 }
 
 
-#line 86 "src/parser/netcraft.y"
-
+#line 201 "src/parser/netcraft.y"
 

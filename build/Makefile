@@ -249,6 +249,30 @@ src/networking/network.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetCraft.dir/build.make CMakeFiles/NetCraft.dir/src/networking/network.cpp.s
 .PHONY : src/networking/network.cpp.s
 
+src/networking/packet_crafter.o: src/networking/packet_crafter.cpp.o
+.PHONY : src/networking/packet_crafter.o
+
+# target to build an object file
+src/networking/packet_crafter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetCraft.dir/build.make CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o
+.PHONY : src/networking/packet_crafter.cpp.o
+
+src/networking/packet_crafter.i: src/networking/packet_crafter.cpp.i
+.PHONY : src/networking/packet_crafter.i
+
+# target to preprocess a source file
+src/networking/packet_crafter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetCraft.dir/build.make CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.i
+.PHONY : src/networking/packet_crafter.cpp.i
+
+src/networking/packet_crafter.s: src/networking/packet_crafter.cpp.s
+.PHONY : src/networking/packet_crafter.s
+
+# target to generate assembly for a file
+src/networking/packet_crafter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetCraft.dir/build.make CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.s
+.PHONY : src/networking/packet_crafter.cpp.s
+
 src/networking/protocols.o: src/networking/protocols.cpp.o
 .PHONY : src/networking/protocols.o
 
@@ -321,6 +345,9 @@ help:
 	@echo "... src/networking/network.o"
 	@echo "... src/networking/network.i"
 	@echo "... src/networking/network.s"
+	@echo "... src/networking/packet_crafter.o"
+	@echo "... src/networking/packet_crafter.i"
+	@echo "... src/networking/packet_crafter.s"
 	@echo "... src/networking/protocols.o"
 	@echo "... src/networking/protocols.i"
 	@echo "... src/networking/protocols.s"

@@ -9,23 +9,27 @@ extern FILE* yyin;
 
 // Main entry point
 int main(int argc, char* argv[]) {
-    // Ensure a file is provided
+    // Determine input source
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <file.netcraft>" << std::endl;
-        return 1;
+        std::cerr << "Usage: " << argv[0] << " <file.netcraft>\n"
+                  << "Alternatively, provide input through standard input.\n";
+        yyin = stdin;
+    } else {
+        // Open the input file
+        yyin = fopen(argv[1], "r");
+        if (!yyin) {
+            std::cerr << "Error: Cannot open file " << argv[1] 
+                      << " (" << strerror(errno) << ")" << std::endl;
+            return 1;
+        }
     }
 
-    // Open the input file
-    yyin = fopen(argv[1], "r");
-    if (!yyin) {
-        std::cerr << "Error: Cannot open file " << argv[1] 
-                  << " (" << strerror(errno) << ")" << std::endl;
-        return 1;
-    }
+    // Display processing information
+    std::cout << "Starting parse for " << (argc > 1 ? argv[1] : "standard input") << std::endl;
 
-    // Enable Bison debugging if necessary (set yydebug=1)
+    // Enable Bison debugging
     extern int yydebug;
-    yydebug = 1; // Set to 0 to disable debugging
+    yydebug = 0; // Set to 0 to disable debugging
 
     // Call the parser
     int parseResult = yyparse();
@@ -35,8 +39,8 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error occurred during parsing. Check the input file and error messages.\n";
     }
 
-    // Close the input file
-    if (fclose(yyin) != 0) {
+    // Close the input file if not standard input
+    if (yyin != stdin && fclose(yyin) != 0) {
         std::cerr << "Warning: Failed to close file " << argv[1] << std::endl;
     }
 

@@ -125,10 +125,24 @@ CMakeFiles/NetCraft.dir/src/networking/protocols.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/NetCraft.dir/src/networking/protocols.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/quangphuly/Documents/NetCraft/src/networking/protocols.cpp -o CMakeFiles/NetCraft.dir/src/networking/protocols.cpp.s
 
+CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o: CMakeFiles/NetCraft.dir/flags.make
+CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o: /Users/quangphuly/Documents/NetCraft/src/networking/packet_crafter.cpp
+CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o: CMakeFiles/NetCraft.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o -MF CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o.d -o CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o -c /Users/quangphuly/Documents/NetCraft/src/networking/packet_crafter.cpp
+
+CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/quangphuly/Documents/NetCraft/src/networking/packet_crafter.cpp > CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.i
+
+CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/quangphuly/Documents/NetCraft/src/networking/packet_crafter.cpp -o CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.s
+
 CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o: CMakeFiles/NetCraft.dir/flags.make
 CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o: /Users/quangphuly/Documents/NetCraft/src/cli/cli.cpp
 CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o: CMakeFiles/NetCraft.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o -MF CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o.d -o CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o -c /Users/quangphuly/Documents/NetCraft/src/cli/cli.cpp
 
 CMakeFiles/NetCraft.dir/src/cli/cli.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/NetCraft.dir/src/cli/cli.cpp.s: cmake_force
 CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o: CMakeFiles/NetCraft.dir/flags.make
 CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o: /Users/quangphuly/Documents/NetCraft/src/parser/parser.cpp
 CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o: CMakeFiles/NetCraft.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o -MF CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o.d -o CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o -c /Users/quangphuly/Documents/NetCraft/src/parser/parser.cpp
 
 CMakeFiles/NetCraft.dir/src/parser/parser.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/NetCraft.dir/src/parser/parser.cpp.s: cmake_force
 CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o: CMakeFiles/NetCraft.dir/flags.make
 CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o: netcraft.tab.cpp
 CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o: CMakeFiles/NetCraft.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o -MF CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o.d -o CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o -c /Users/quangphuly/Documents/NetCraft/build/netcraft.tab.cpp
 
 CMakeFiles/NetCraft.dir/netcraft.tab.cpp.i: cmake_force
@@ -171,7 +185,7 @@ CMakeFiles/NetCraft.dir/lex.yy.cpp.o: CMakeFiles/NetCraft.dir/flags.make
 CMakeFiles/NetCraft.dir/lex.yy.cpp.o: lex.yy.cpp
 CMakeFiles/NetCraft.dir/lex.yy.cpp.o: netcraft.tab.h
 CMakeFiles/NetCraft.dir/lex.yy.cpp.o: CMakeFiles/NetCraft.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/NetCraft.dir/lex.yy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/NetCraft.dir/lex.yy.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/NetCraft.dir/lex.yy.cpp.o -MF CMakeFiles/NetCraft.dir/lex.yy.cpp.o.d -o CMakeFiles/NetCraft.dir/lex.yy.cpp.o -c /Users/quangphuly/Documents/NetCraft/build/lex.yy.cpp
 
 CMakeFiles/NetCraft.dir/lex.yy.cpp.i: cmake_force
@@ -187,6 +201,7 @@ NetCraft_OBJECTS = \
 "CMakeFiles/NetCraft.dir/src/main.cpp.o" \
 "CMakeFiles/NetCraft.dir/src/networking/network.cpp.o" \
 "CMakeFiles/NetCraft.dir/src/networking/protocols.cpp.o" \
+"CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o" \
 "CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o" \
 "CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o" \
 "CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o" \
@@ -198,6 +213,7 @@ NetCraft_EXTERNAL_OBJECTS =
 NetCraft: CMakeFiles/NetCraft.dir/src/main.cpp.o
 NetCraft: CMakeFiles/NetCraft.dir/src/networking/network.cpp.o
 NetCraft: CMakeFiles/NetCraft.dir/src/networking/protocols.cpp.o
+NetCraft: CMakeFiles/NetCraft.dir/src/networking/packet_crafter.cpp.o
 NetCraft: CMakeFiles/NetCraft.dir/src/cli/cli.cpp.o
 NetCraft: CMakeFiles/NetCraft.dir/src/parser/parser.cpp.o
 NetCraft: CMakeFiles/NetCraft.dir/netcraft.tab.cpp.o
@@ -208,7 +224,7 @@ NetCraft: /Users/quangphuly/Documents/NetCraft/third_party/boost/libs/lib/libboo
 NetCraft: /Users/quangphuly/Documents/NetCraft/third_party/boost/libs/lib/libboost_system.dylib
 NetCraft: /Users/quangphuly/Documents/NetCraft/third_party/boost/libs/lib/libboost_atomic.dylib
 NetCraft: CMakeFiles/NetCraft.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable NetCraft"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/quangphuly/Documents/NetCraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable NetCraft"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/NetCraft.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
